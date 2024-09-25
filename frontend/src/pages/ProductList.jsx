@@ -299,24 +299,24 @@ const ProductList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="flex gap-4 items-center mb-4">
-        <h1 className="text-2xl font-bold">Product List</h1>
+    <div className="min-h-screen bg-gray-100 overflow-x-auto sm:p-6 p-4">
+      <div className="flex  sm:gap-4 gap-2 items-center mb-4">
+        <h1 className="sm:text-2xl text-lg  font-bold">Product List</h1>
         <input
           type="text"
           placeholder="Search products..."
-          className="border p-2 rounded"
+          className="border p-2 sm:w-48 w-24 rounded"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button
+        {/* <button
           className="text-blue-500 ml-2 p-2 border-2 rounded"
           onClick={() => setPage(1)}
         >
           Search
-        </button>
+        </button> */}
         <button
-          className="text-xl font-semibold border-2 p-2 rounded-2xl"
+          className=" font-semibold border-2 p-2 sm:text-lg text-xs rounded-2xl"
           onClick={() => navigate('/add-product')}
         >
           Add Product

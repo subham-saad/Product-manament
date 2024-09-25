@@ -42,8 +42,34 @@ export const createProduct = asyncHandler(async (req, res) => {
 });
 
 
+// export const getProducts = async (req, res) => {
+//   const { search, sortBy } = req.query;
+
+//   try {
+//     let query = {};
+
+//     if (search) {
+//       query = {
+//         $or: [
+//           { name: { $regex: new RegExp(search, "i") } },
+//           { description: { $regex: new RegExp(search, "i") } },
+//         ],
+//       };
+//     }
+
+//     const products = await Product.find(query).sort({
+//       createdAt: sortBy === "asc" ? 1 : -1,
+//     });
+
+//     return res.status(200).json(new ApiResponse(200, products, "Products fetched successfully"));
+//   } catch (error) {
+//     throw new ApiError(500, error.message);
+//   }
+// };
+
+
 export const getProducts = async (req, res) => {
-  const { search, sortBy } = req.query;
+  const { search, sortBy, page = 1, limit = 10 } = req.query;
 
   try {
     let query = {};
@@ -57,11 +83,21 @@ export const getProducts = async (req, res) => {
       };
     }
 
-    const products = await Product.find(query).sort({
-      createdAt: sortBy === "asc" ? 1 : -1,
-    });
+    const products = await Product.find(query)
+      .sort({ createdAt: sortBy === "asc" ? 1 : -1 })
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
 
-    return res.status(200).json(new ApiResponse(200, products, "Products fetched successfully"));
+    const totalProducts = await Product.countDocuments(query);
+
+    return res.status(200).json({
+      status: 200,
+      data: products,
+      message: "Products fetched successfully",
+      totalProducts,
+      currentPage: page,
+      totalPages: Math.ceil(totalProducts / limit),
+    });
   } catch (error) {
     throw new ApiError(500, error.message);
   }

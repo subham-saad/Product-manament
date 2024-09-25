@@ -4,21 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import mongoose from 'mongoose';
-// Controller to generate access and refresh tokens (adjust for user authentication)
-// const generateAccessAndRefereshTokens = async (adminId) => {
-//   try {
-//     const admin = await Admin.findById(adminId); // Assuming you're using an admin model
-//     const accessToken = admin.generateAccessToken();
-//     const refreshToken = admin.generateRefreshToken();
 
-//     admin.refreshToken = refreshToken;
-//     await admin.save({ validateBeforeSave: false });
-
-//     return { accessToken, refreshToken };
-//   } catch (error) {
-//     throw new ApiError(500, "Something went wrong");
-//   }
-// };
 
 
 export const createProduct = asyncHandler(async (req, res) => {

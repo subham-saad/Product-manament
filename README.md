@@ -19,3 +19,6 @@ cd backend
 
 
 npm run dev
+
+
+uUsing cloudinary sdk to store the images of products.

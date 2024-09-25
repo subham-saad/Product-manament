@@ -1,4 +1,5 @@
 import { useState } from 'react';
+const apiurl = import.meta.env.VITE_APP_API_URL;
 
 export const useCreateProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ export const useCreateProduct = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/product/createproduct', {
+      const response = await fetch(`${apiurl}/createproduct`, {
         method: 'POST',
         body: formData,
       });

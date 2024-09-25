@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCreateProduct } from '../hooks/useCreateProduct';
 import ProductForm from '../components/ProductForm';
 

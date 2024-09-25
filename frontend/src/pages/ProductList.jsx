@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import imagecomingsoon from '../assets/imagescoming.png';
 import { useProductContext } from '../context/ProductContext';
-
+const apiurl = import.meta.env.VITE_APP_API_URL;
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/product/products');
+        const response = await fetch(`${apiurl}/products`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch products');
@@ -66,7 +66,7 @@ const ProductList = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this product?');
     if (confirmDelete) {
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/product/deleteproduct/${id}`, {
+        const response = await fetch(`${apiurl}/deleteproduct/${id}`, {
           method: 'DELETE',
         });
 

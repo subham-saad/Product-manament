@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUpdateProduct } from '../hooks/useUpdateProduct';
 import { useProductContext } from '../context/ProductContext';
-
+const apiurl = import.meta.env.VITE_APP_API_URL;
 const ProductUpdateForm = () => {
   const { updateProduct, loading: updateLoading, error: updateError } = useUpdateProduct();
   const { id } = useParams();
@@ -22,7 +22,7 @@ const ProductUpdateForm = () => {
   // Function to fetch product by ID
   const fetchProductById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/product/getproduct/${id}`);
+      const response = await fetch(`${apiurl}/getproduct/${id}`);
 
       if (!response.ok) {
         throw new Error('Failed to fetch product details');
@@ -67,7 +67,7 @@ const ProductUpdateForm = () => {
     });
   };
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

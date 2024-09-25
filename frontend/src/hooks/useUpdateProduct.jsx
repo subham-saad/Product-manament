@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+const apiurl = import.meta.env.VITE_APP_API_URL;
 export const useUpdateProduct = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -37,7 +37,7 @@ export const useUpdateProduct = () => {
     setError(null);
   
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/product/updateproduct/${id}`, {
+      const response = await fetch(`${apiurl}/updateproduct/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json', // Set the content type to JSON
